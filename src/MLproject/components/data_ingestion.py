@@ -20,10 +20,11 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         try:
             # code to read form the mysql data
-            df=read_MySql_data()
+            # df=read_MySql_data()
+            df=pd.read_csv(os.path.join("notebook/data", 'raw.csv'))
             logging.info("Reading completed from MySQL database")
 
-            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path))
+            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
             df.to_csv(self.ingestion_config.raw_data_path, index=False, header=True)
 
             # code to split and train-test data
